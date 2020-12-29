@@ -9,10 +9,10 @@ client.once("ready", () => {
 });
 
 // Set avatar
-client.user
+/* client.user
   .setAvatar("mene.jpg")
   .then((user) => console.log("New avatar set!"))
-  .catch(console.error);
+  .catch(console.error); */
 
 // Bot login -- keep at end of file
 client.login(discord_token);
