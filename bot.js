@@ -14,4 +14,5 @@ client.user
   .then((user) => console.log("New avatar set!"))
   .catch(console.error);
 
+// Bot login -- keep at end of file
 client.login(discord_token);
