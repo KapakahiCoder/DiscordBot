@@ -34,15 +34,13 @@ client.on("message", (msg) => {
         headers: { Accept: "application/json" },
       })
       .then((response) => {
-        //const chuckJoke = response.data.value;
-        console.log(response);
-        // msg.reply(chuckJoke);
+        const compliment = response.data.compliment;
+        msg.react("😀");
+        msg.reply(`${compliment} :sparkles:`);
       })
       .catch((error) => {
         console.error(error);
       });
-    msg.react("😀");
-    msg.reply(`You are amazing ${msg.author.username} :sparkles:`);
   }
 
   //Weather forecast
