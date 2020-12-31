@@ -9,11 +9,19 @@ client.once("ready", () => {
   console.log("bot is online");
 });
 
+//Checks to see if message is prefixed w/ an "!"
+const prefix = "!";
+
 client.on("message", (msg) => {
-  if (
-    msg.content.toLowerCase() === "hello" ||
-    msg.content.toLowerCase() === "hi"
-  ) {
+  if (msg.content[0] !== prefix) {
+    console.log("no prefix");
+    return;
+  }
+  //Gets the command/prompt from the user
+  const args = msg.content.slice(prefix.length).trim().split(" ");
+  const command = args.shift().toLowerCase();
+
+  if (command === "hello" || command === "hi") {
     msg.reply(`Hello ${msg.author.username}`);
   }
 });
