@@ -10,8 +10,11 @@ client.once("ready", () => {
 });
 
 client.on("message", (msg) => {
-  if (msg.content === "hello") {
-    msg.reply("hello");
+  if (
+    msg.content.toLowerCase() === "hello" ||
+    msg.content.toLowerCase() === "hi"
+  ) {
+    msg.reply(`Hello ${msg.author.username}`);
   }
 });
 
