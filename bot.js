@@ -30,7 +30,7 @@ client.on("message", (msg) => {
   // ego boast
   if (command === "ego") {
     msg.react("😀");
-    msg.reply(`You are amazing ${msg.author.username}`);
+    msg.reply(`You are amazing ${msg.author.username} :sparkles:`);
   }
 
   //Weather forecast
@@ -41,8 +41,17 @@ client.on("message", (msg) => {
   axios
     .get(weatherURL)
     .then((response) => {
-      msg.reply(response);
+      // msg.reply(response);
+      const temp = parseFloat(
+        1.8 * (response.data.main.temp - 273) + 32
+      ).toFixed(2);
+      const feelsLike = parseFloat(
+        1.8 * (response.data.main.feels_like - 273) + 32
+      ).toFixed(2);
       console.log(response);
+      console.log(response.data.main.temp);
+      msg.reply(`Current temperature is ${temp}F`);
+      msg.reply(`Feels like ${feelsLike}F`);
     })
     .catch((error) => {
       console.error(error);
