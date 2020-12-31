@@ -29,6 +29,18 @@ client.on("message", (msg) => {
   }
   // ego boast
   if (command === "ego") {
+    axios
+      .get("https://complimentr.com/api", {
+        headers: { Accept: "application/json" },
+      })
+      .then((response) => {
+        //const chuckJoke = response.data.value;
+        console.log(response);
+        // msg.reply(chuckJoke);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     msg.react("😀");
     msg.reply(`You are amazing ${msg.author.username} :sparkles:`);
   }
@@ -60,7 +72,7 @@ client.on("message", (msg) => {
   }
 
   //random dad jokes
-  if (command === "dadjoke") {
+  if (command === "dadjoke" || command === "dadjokes") {
     axios
       .get("https://icanhazdadjoke.com/", {
         headers: { Accept: "application/json" },
@@ -69,6 +81,21 @@ client.on("message", (msg) => {
         const joke = response.data.joke;
         console.log(response.data);
         msg.reply(joke);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  //random chuck norris jokes
+  if (command === "chuck") {
+    axios
+      .get("https://api.chucknorris.io/jokes/random", {
+        headers: { Accept: "application/json" },
+      })
+      .then((response) => {
+        const chuckJoke = response.data.value;
+        msg.reply(chuckJoke);
       })
       .catch((error) => {
         console.error(error);
