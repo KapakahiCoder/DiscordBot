@@ -9,11 +9,24 @@ client.once("ready", () => {
   console.log("bot is online");
 });
 
-// Set avatar
-/* client.user
-  .setAvatar("mene.jpg")
-  .then((user) => console.log("New avatar set!"))
-  .catch(console.error); */
+client.on("message", (msg) => {
+  if (msg.content === "hello") {
+    msg.reply("hello");
+  }
+});
+
+const weather_token = process.env.OPEN_WEATHER_API_KEY;
+const city = "Honolulu";
+const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_token}`;
+
+axios
+  .get(weatherURL)
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
 // Bot login -- keep at end of file
 client.login(discord_token);
