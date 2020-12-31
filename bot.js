@@ -34,28 +34,46 @@ client.on("message", (msg) => {
   }
 
   //Weather forecast
-  const weather_token = process.env.OPEN_WEATHER_API_KEY;
-  const city = args[0];
-  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_token}`;
+  if (command === "weather") {
+    const weather_token = process.env.OPEN_WEATHER_API_KEY;
+    const city = args[0];
+    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_token}`;
 
-  axios
-    .get(weatherURL)
-    .then((response) => {
-      // msg.reply(response);
-      const temp = parseFloat(
-        1.8 * (response.data.main.temp - 273) + 32
-      ).toFixed(2);
-      const feelsLike = parseFloat(
-        1.8 * (response.data.main.feels_like - 273) + 32
-      ).toFixed(2);
-      console.log(response);
-      console.log(response.data.main.temp);
-      msg.reply(`Current temperature is ${temp}F`);
-      msg.reply(`Feels like ${feelsLike}F`);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    axios
+      .get(weatherURL)
+      .then((response) => {
+        // msg.reply(response);
+        const temp = parseFloat(
+          1.8 * (response.data.main.temp - 273) + 32
+        ).toFixed(2);
+        const feelsLike = parseFloat(
+          1.8 * (response.data.main.feels_like - 273) + 32
+        ).toFixed(2);
+        console.log(response);
+        console.log(response.data.main.temp);
+        msg.reply(`Current temperature is ${temp}F`);
+        msg.reply(`Feels like ${feelsLike}F`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  //random dad jokes
+  if (command === "dadjoke") {
+    axios
+      .get("https://icanhazdadjoke.com/", {
+        headers: { Accept: "application/json" },
+      })
+      .then((response) => {
+        const joke = response.data.joke;
+        console.log(response.data);
+        msg.reply(joke);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 });
 
 // Bot login -- keep at end of file
