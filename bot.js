@@ -80,16 +80,16 @@ client.on("message", (msg) => {
       .get(weatherForecastURL)
       .then((response) => {
         // msg.reply(response);
-        const temp = parseFloat(
+        /*  const temp = parseFloat(
           1.8 * (response.data.main.temp - 273) + 32
         ).toFixed(2);
         const feelsLike = parseFloat(
           1.8 * (response.data.main.feels_like - 273) + 32
-        ).toFixed(2);
-        console.log(response);
-        console.log(response.data.main.temp);
-        msg.reply(`Current temperature is ${temp}F`);
-        msg.reply(`Feels like ${feelsLike}F`);
+        ).toFixed(2); */
+        console.log(response.data.list[0]);
+        // console.log(response.data.main.temp);
+        // msg.reply(`Current temperature is ${temp}F`);
+        // msg.reply(`Feels like ${feelsLike}F`);
       })
       .catch((error) => {
         console.error(error);
@@ -121,6 +121,19 @@ client.on("message", (msg) => {
       .then((response) => {
         const chuckJoke = response.data.value;
         msg.reply(chuckJoke);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  //random insults
+  if (command === "insult" || command === "insults") {
+    axios
+      .get("https://evilinsult.com/generate_insult.php")
+      .then((response) => {
+        const burn = response.data;
+        msg.reply(burn);
       })
       .catch((error) => {
         console.error(error);
