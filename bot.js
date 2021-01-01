@@ -43,7 +43,7 @@ client.on("message", (msg) => {
       });
   }
 
-  //Weather forecast
+  //Current Weather
   if (command === "weather") {
     const weather_token = process.env.OPEN_WEATHER_API_KEY;
     const city = args[0];
@@ -51,6 +51,33 @@ client.on("message", (msg) => {
 
     axios
       .get(weatherURL)
+      .then((response) => {
+        // msg.reply(response);
+        const temp = parseFloat(
+          1.8 * (response.data.main.temp - 273) + 32
+        ).toFixed(2);
+        const feelsLike = parseFloat(
+          1.8 * (response.data.main.feels_like - 273) + 32
+        ).toFixed(2);
+        console.log(response);
+        console.log(response.data.main.temp);
+        msg.reply(`Current temperature is ${temp}F`);
+        msg.reply(`Feels like ${feelsLike}F`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  //Weather Forecast
+
+  if (command === "forecast") {
+    const weather_token = process.env.OPEN_WEATHER_API_KEY;
+    const city = args[0];
+    const weatherForecastURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weather_token}`;
+
+    axios
+      .get(weatherForecastURL)
       .then((response) => {
         // msg.reply(response);
         const temp = parseFloat(
