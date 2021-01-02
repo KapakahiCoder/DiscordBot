@@ -53,15 +53,12 @@ client.on("message", (msg) => {
     axios
       .get(weatherURL)
       .then((response) => {
-        // msg.reply(response);
         const temp = parseFloat(
           1.8 * (response.data.main.temp - 273) + 32
         ).toFixed(2);
         const feelsLike = parseFloat(
           1.8 * (response.data.main.feels_like - 273) + 32
         ).toFixed(2);
-        console.log(response);
-        console.log(response.data.main.temp);
         msg.reply(`Current temperature is ${temp}F`);
         msg.reply(`Feels like ${feelsLike}F`);
       })
@@ -77,25 +74,25 @@ client.on("message", (msg) => {
     const location = args[0];
     const geocodingURL = `https://google-maps-geocoding.p.rapidapi.com/geocode/json?language=en&address=${location}&rapidapi-key=${rapidapi_key}`;
 
-    const getCoords = async () => {
+    const weatherForecast = async () => {
       const response = await axios(geocodingURL);
       const lat = response.data.results[0].geometry.location.lat;
-      const long = response.data.results[0].geometry.location.long;
+      const lon = response.data.results[0].geometry.location.lng;
+
+      const weather_token = process.env.OPEN_WEATHER_API_KEY;
+      const weatherForecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${weather_token}`;
+
+      axios
+        .get(weatherForecastURL)
+        .then((response) => {
+          // msg.reply(response);
+          console.log(response, "&&&&&&&&&&&");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
-
-    getCoords();
-    const weather_token = process.env.OPEN_WEATHER_API_KEY;
-    const weatherForecastURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weather_token}`;
-
-    axios
-      .get(weatherForecastURL)
-      .then((response) => {
-        // msg.reply(response);
-        // console.log(response.data.list[0]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    weatherForecast();
   }
 
   //random dad jokes
