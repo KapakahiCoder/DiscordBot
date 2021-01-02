@@ -85,8 +85,25 @@ client.on("message", (msg) => {
       axios
         .get(weatherForecastURL)
         .then((response) => {
-          // msg.reply(response);
-          console.log(response, "&&&&&&&&&&&");
+          //msg.reply(response);
+
+          const date = response.data.daily[1].dt;
+          const sunrise = response.data.daily[1].sunrise;
+          const sunset = response.data.daily[1].sunset;
+          const pressure = response.data.daily[1].pressure;
+          const humidity = response.data.daily[1].humidity;
+          const wind = response.data.daily[1].wind_speed;
+          const condition = response.data.daily[1].weather[0].description;
+          const icon = response.data.daily[1].weather[0].icon;
+
+          console.log(date, "DATTTTE");
+          console.log(date, "DATTTTE");
+          console.log(pressure, "DATTTTE");
+          console.log(humidity, "DATTTTE");
+          console.log(wind, "DATTTTE");
+          console.log(condition, "DATTTTE");
+          console.log(icon, "DATTTTE");
+          //console.log(response, "FORECAST!!!!!");
         })
         .catch((error) => {
           console.error(error);
