@@ -27,6 +27,7 @@ client.on("message", (msg) => {
   if (command === "hello" || command === "hi") {
     msg.reply(`Hello ${msg.author.username}`);
   }
+
   // ego boast
   if (command === "ego") {
     axios
@@ -72,24 +73,25 @@ client.on("message", (msg) => {
   //Weather Forecast
 
   if (command === "forecast") {
+    const rapidapi_key = process.env.RAPID_API_KEY;
+    const location = args[0];
+    const geocodingURL = `https://google-maps-geocoding.p.rapidapi.com/geocode/json?language=en&address=${location}&rapidapi-key=${rapidapi_key}`;
+
+    const getCoords = async () => {
+      const response = await axios(geocodingURL);
+      const lat = response.data.results[0].geometry.location.lat;
+      const long = response.data.results[0].geometry.location.long;
+    };
+
+    getCoords();
     const weather_token = process.env.OPEN_WEATHER_API_KEY;
-    const city = args[0];
     const weatherForecastURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weather_token}`;
 
     axios
       .get(weatherForecastURL)
       .then((response) => {
         // msg.reply(response);
-        /*  const temp = parseFloat(
-          1.8 * (response.data.main.temp - 273) + 32
-        ).toFixed(2);
-        const feelsLike = parseFloat(
-          1.8 * (response.data.main.feels_like - 273) + 32
-        ).toFixed(2); */
-        console.log(response.data.list[0]);
-        // console.log(response.data.main.temp);
-        // msg.reply(`Current temperature is ${temp}F`);
-        // msg.reply(`Feels like ${feelsLike}F`);
+        // console.log(response.data.list[0]);
       })
       .catch((error) => {
         console.error(error);
