@@ -86,24 +86,28 @@ client.on("message", (msg) => {
         .get(weatherForecastURL)
         .then((response) => {
           //msg.reply(response);
-
-          const date = response.data.daily[1].dt;
-          const sunrise = response.data.daily[1].sunrise;
-          const sunset = response.data.daily[1].sunset;
-          const pressure = response.data.daily[1].pressure;
-          const humidity = response.data.daily[1].humidity;
-          const wind = response.data.daily[1].wind_speed;
-          const condition = response.data.daily[1].weather[0].description;
-          const icon = response.data.daily[1].weather[0].icon;
-
-          console.log(date, "DATTTTE");
-          console.log(date, "DATTTTE");
-          console.log(pressure, "DATTTTE");
-          console.log(humidity, "DATTTTE");
-          console.log(wind, "DATTTTE");
-          console.log(condition, "DATTTTE");
-          console.log(icon, "DATTTTE");
-          //console.log(response, "FORECAST!!!!!");
+          for (let i = 1; i < 4; i++) {
+            const unixTime = response.data.daily[i].dt;
+            const sunrise = response.data.daily[i].sunrise;
+            const sunset = response.data.daily[i].sunset;
+            const pressure = response.data.daily[i].pressure;
+            const humidity = response.data.daily[i].humidity;
+            const wind = response.data.daily[i].wind_speed;
+            const condition = response.data.daily[i].weather[0].description;
+            const icon = response.data.daily[i].weather[0].icon;
+            const milliseconds = unixTime * 1000;
+            const dateObject = new Date(milliseconds);
+            const readableDate = dateObject.toLocaleString();
+            console.log(readableDate, "@#@#$@#$@#$@#");
+            console.log("day " + i);
+            console.log(date, "DATTTTE");
+            console.log(date, "DATTTTE");
+            console.log(pressure, "DATTTTE");
+            console.log(humidity, "DATTTTE");
+            console.log(wind, "DATTTTE");
+            console.log(condition, "DATTTTE");
+            console.log(icon, "DATTTTE");
+          }
         })
         .catch((error) => {
           console.error(error);
