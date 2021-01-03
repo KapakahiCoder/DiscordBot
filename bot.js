@@ -180,28 +180,37 @@ client.on("message", (msg) => {
       .get(nbaScoreURL)
       .then((response) => {
         const nbaData = response.data.api.games;
-        console.log(nbaData);
-        msg.channel.send(nbaData[0].vTeam.logo);
-        nbaData.forEach((game) => {
-          const scoreEmbed = new Discord.RichEmbed()
-            .setColor(f5f542)
-            .setTitle("Nba.com")
-            .setURL("http://www.nba.com")
-            .setDescription("Click to see details")
-            .setAuthor(message.author.username)
-            .addField("heeey, testing this", "score")
-            .setThumbnail("src\nbalogo.png");
 
-          msg.channel.send(
-            "Home Team: " +
-              game.hTeam.fullName +
-              " - " +
-              game.hTeam.score.points
-          );
-          msg.channel.send(
-            "Visitors: " + game.vTeam.fullName + " - " + game.vTeam.score.points
-          );
-          msg.channel.send(game.statusGame);
+        console.log(nbaData);
+        nbaData.forEach((game) => {
+          const scoreEmbed = new Discord.MessageEmbed()
+            .setColor("RANDOM")
+            .setTitle("NBA.com")
+            .setURL("http://www.nba.com")
+            .setDescription("Game results:")
+            .setAuthor(msg.author.username)
+            .addFields(
+              {
+                name: "Home Team",
+                value: `${game.hTeam.fullName}
+              ${game.hTeam.score.points}`,
+                inline: true,
+              },
+              {
+                name: "Away Team",
+                value: `${game.vTeam.fullName}
+              ${game.vTeam.score.points}`,
+                inline: true,
+              }
+            )
+            .setThumbnail("https://i.imgur.com/r5qISWe.png")
+            .setFooter(game.statusGame)
+            .setTimestamp();
+          try {
+            msg.channel.send(scoreEmbed);
+          } catch {
+            msg.reply("Sorry, there was an error. Please try again later");
+          }
           msg.channel.send("***********************");
         });
       })
