@@ -181,37 +181,74 @@ client.on("message", (msg) => {
       .then((response) => {
         const nbaData = response.data.api.games;
 
-        console.log(nbaData);
         nbaData.forEach((game) => {
-          const scoreEmbed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
-            .setTitle("NBA.com")
-            .setURL("http://www.nba.com")
-            .setDescription("Game results:")
-            .setAuthor(msg.author.username)
-            .addFields(
-              {
-                name: "Home Team",
-                value: `${game.hTeam.fullName}
-              ${game.hTeam.score.points}`,
-                inline: true,
-              },
-              {
-                name: "Away Team",
-                value: `${game.vTeam.fullName}
-              ${game.vTeam.score.points}`,
-                inline: true,
-              }
-            )
-            .setThumbnail("https://i.imgur.com/r5qISWe.png")
-            .setFooter(game.statusGame)
-            .setTimestamp();
-          try {
-            msg.channel.send(scoreEmbed);
-          } catch {
-            msg.reply("Sorry, there was an error. Please try again later");
+          let homeScore = parseInt(game.hTeam.score.points);
+          let awayScore = parseInt(game.vTeam.score.points);
+
+          //if home team wins, home team logo is set to image and away team is thumbnail
+          if (homeScore >= awayScore) {
+            const scoreEmbed = new Discord.MessageEmbed()
+              .setColor("RANDOM")
+              .setTitle("NBA.com")
+              .setURL("http://www.nba.com")
+              .setDescription("Game results:")
+              .setAuthor(msg.author.username)
+              .addFields(
+                {
+                  name: "Home Team",
+                  value: `${game.hTeam.fullName}
+              ${homeScore}`,
+                  inline: true,
+                },
+                {
+                  name: "Away Team",
+                  value: `${game.vTeam.fullName}
+              ${awayScore}`,
+                  inline: true,
+                }
+              )
+              .setImage(game.hTeam.logo, { size: 10 })
+              .setThumbnail(game.vTeam.logo)
+              .setFooter(game.statusGame)
+              .setTimestamp();
+            try {
+              msg.channel.send(scoreEmbed);
+            } catch {
+              msg.reply("Sorry, there was an error. Please try again later");
+            }
+            // away team is winner, so their logo is set to image and home team is thumbnail
+          } else {
+            const scoreEmbed = new Discord.MessageEmbed()
+              .setColor("RANDOM")
+              .setTitle("NBA.com")
+              .setURL("http://www.nba.com")
+              .setDescription("Game results:")
+              .setAuthor(msg.author.username)
+              .addFields(
+                {
+                  name: "Home Team",
+                  value: `${game.hTeam.fullName}
+            ${homeScore}`,
+                  inline: true,
+                },
+                {
+                  name: "Away Team",
+                  value: `${game.vTeam.fullName}
+            ${awayScore}`,
+                  inline: true,
+                }
+              )
+              .setImage(game.vTeam.logo)
+              .setThumbnail(game.hTeam.logo)
+              .setFooter(game.statusGame)
+              .setTimestamp();
+            try {
+              msg.channel.send(scoreEmbed);
+            } catch {
+              msg.reply("Sorry, there was an error. Please try again later");
+            }
           }
-          msg.channel.send("***********************");
+          msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀🏀🏀🏀");
         });
       })
       .catch((error) => {
