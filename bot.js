@@ -14,14 +14,11 @@ const prefix = "!";
 
 client.on("message", (msg) => {
   if (msg.content[0] !== prefix) {
-    console.log("no prefix");
     return;
   }
   //Gets the command/prompt from the user
   const args = msg.content.slice(prefix.length).trim().split(" ");
   const command = args.shift().toLowerCase();
-  console.log(args[0]);
-  console.log(command);
 
   //Greeting
   const greetings = [
@@ -135,7 +132,6 @@ client.on("message", (msg) => {
       })
       .then((response) => {
         const joke = response.data.joke;
-        console.log(response.data);
         msg.reply(joke);
       })
       .catch((error) => {
@@ -186,6 +182,7 @@ client.on("message", (msg) => {
           let awayScore = parseInt(game.vTeam.score.points);
 
           //if home team wins, home team logo is set to image and away team is thumbnail
+          //Will refactor this later
           if (homeScore >= awayScore) {
             const scoreEmbed = new Discord.MessageEmbed()
               .setColor("RANDOM")
@@ -217,6 +214,7 @@ client.on("message", (msg) => {
               msg.reply("Sorry, there was an error. Please try again later");
             }
             // away team is winner, so their logo is set to image and home team is thumbnail
+            //Will refactor this part later
           } else {
             const scoreEmbed = new Discord.MessageEmbed()
               .setColor("RANDOM")
