@@ -207,7 +207,7 @@ client.on("message", (msg) => {
                   inline: true,
                 }
               )
-              .setImage(game.hTeam.logo, { size: 10 })
+              .setImage(game.hTeam.logo, { size: 50 })
               .setThumbnail(game.vTeam.logo)
               .setFooter(game.statusGame)
               .setTimestamp();
@@ -238,7 +238,7 @@ client.on("message", (msg) => {
                   inline: true,
                 }
               )
-              .setImage(game.vTeam.logo)
+              .setImage(game.vTeam.logo, { size: 50 })
               .setThumbnail(game.hTeam.logo)
               .setFooter(game.statusGame)
               .setTimestamp();
