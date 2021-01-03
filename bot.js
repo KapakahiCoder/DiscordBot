@@ -181,18 +181,28 @@ client.on("message", (msg) => {
       .then((response) => {
         const nbaData = response.data.api.games;
         console.log(nbaData);
+        msg.channel.send(nbaData[0].vTeam.logo);
         nbaData.forEach((game) => {
-          console.log(
+          const scoreEmbed = new Discord.RichEmbed()
+            .setColor(f5f542)
+            .setTitle("Nba.com")
+            .setURL("http://www.nba.com")
+            .setDescription("Click to see details")
+            .setAuthor(message.author.username)
+            .addField("heeey, testing this", "score")
+            .setThumbnail("src\nbalogo.png");
+
+          msg.channel.send(
             "Home Team: " +
               game.hTeam.fullName +
               " - " +
               game.hTeam.score.points
           );
-          console.log(
+          msg.channel.send(
             "Visitors: " + game.vTeam.fullName + " - " + game.vTeam.score.points
           );
-          console.log(game.statusGame);
-          console.log("***********************");
+          msg.channel.send(game.statusGame);
+          msg.channel.send("***********************");
         });
       })
       .catch((error) => {
