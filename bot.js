@@ -24,8 +24,20 @@ client.on("message", (msg) => {
   console.log(command);
 
   //Greeting
+  const greetings = [
+    "Hello 👋",
+    "Aloha 🤙🏽",
+    "Konnichiwa  ⛩ ",
+    "Greetings 😀",
+    "Ola  🌞",
+    "Bonjour 🍷",
+    "Guten tag 🍺",
+    "Namaste 🇮🇳",
+    "Nihao 🐼ind",
+  ];
   if (command === "hello" || command === "hi") {
-    msg.reply(`Hello ${msg.author.username}`);
+    const random = Math.floor(Math.random() * greetings.length);
+    msg.reply(` ${greetings[random]}`);
   }
 
   // ego boast
