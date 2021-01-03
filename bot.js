@@ -100,8 +100,7 @@ client.on("message", (msg) => {
             const readableDate = dateObject.toLocaleString();
             console.log(readableDate, "@#@#$@#$@#$@#");
             console.log("day " + i);
-            console.log(date, "DATTTTE");
-            console.log(date, "DATTTTE");
+            console.log(unixTime, "DATTTTE");
             console.log(pressure, "DATTTTE");
             console.log(humidity, "DATTTTE");
             console.log(wind, "DATTTTE");
@@ -154,6 +153,23 @@ client.on("message", (msg) => {
       .then((response) => {
         const burn = response.data;
         msg.reply(burn);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  //Get NBA scores for the day
+  if (command === "nba") {
+    const rapidapi_key = process.env.RAPID_API_KEY;
+    const date = args[0];
+    const nbaScoreURL = `https://api-nba-v1.p.rapidapi.com/games/date/${date}?rapidapi-key=${rapidapi_key}`;
+    axios
+      .get(nbaScoreURL)
+      .then((response) => {
+        const nbaData = response.data.api.games;
+        console.log(nbaData);
+        //api.games
       })
       .catch((error) => {
         console.error(error);
