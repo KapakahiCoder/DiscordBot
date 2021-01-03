@@ -169,7 +169,19 @@ client.on("message", (msg) => {
       .then((response) => {
         const nbaData = response.data.api.games;
         console.log(nbaData);
-        //api.games
+        nbaData.forEach((game) => {
+          console.log(
+            "Home Team: " +
+              game.hTeam.fullName +
+              " - " +
+              game.hTeam.score.points
+          );
+          console.log(
+            "Visitors: " + game.vTeam.fullName + " - " + game.vTeam.score.points
+          );
+          console.log(game.statusGame);
+          console.log("***********************");
+        });
       })
       .catch((error) => {
         console.error(error);
