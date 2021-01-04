@@ -147,7 +147,7 @@ client.on("message", (msg) => {
             const weatherForecast = new Discord.MessageEmbed()
               .setColor("RANDOM")
               .setTitle(`${date} Weather Report`)
-              .setAuthor(msg.author.username)
+              .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
                   name: "Morning Temp",
@@ -257,7 +257,7 @@ client.on("message", (msg) => {
               .setTitle("NBA.com")
               .setURL("http://www.nba.com")
               .setDescription("Game results:")
-              .setAuthor(msg.author.username)
+              .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
                   name: "Home Team",
@@ -289,7 +289,7 @@ client.on("message", (msg) => {
               .setTitle("NBA.com")
               .setURL("http://www.nba.com")
               .setDescription("Game results:")
-              .setAuthor(msg.author.username)
+              .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
                   name: "Home Team",
