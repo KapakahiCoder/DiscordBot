@@ -30,10 +30,11 @@ client.on("message", (msg) => {
     "Bonjour 🍷",
     "Guten tag 🍺",
     "Namaste 🇮🇳",
-    "Nihao 🐼ind",
+    "Nihao 🐼",
   ];
   if (command === "hello" || command === "hi") {
-    const random = Math.floor(Math.random() * greetings.length);
+    const random = Math.floor(Math.random() * greetings.length + 1);
+    console.log(random);
     msg.reply(` ${greetings[random]}`);
   }
 
@@ -46,7 +47,7 @@ client.on("message", (msg) => {
       .then((response) => {
         const compliment = response.data.compliment;
         msg.react("😀");
-        msg.reply(`${compliment} :sparkles:`);
+        msg.reply(`❤️ ${compliment} :sparkles:`);
       })
       .catch((error) => {
         console.error(error);
@@ -225,7 +226,7 @@ client.on("message", (msg) => {
       })
       .then((response) => {
         const chuckJoke = response.data.value;
-        msg.reply(chuckJoke);
+        msg.reply("🥋 " + chuckJoke);
       })
       .catch((error) => {
         console.error(error);
@@ -238,7 +239,7 @@ client.on("message", (msg) => {
       .get("https://evilinsult.com/generate_insult.php")
       .then((response) => {
         const burn = response.data;
-        msg.reply(burn);
+        msg.reply("💀 " + burn);
       })
       .catch((error) => {
         console.error(error);
@@ -278,7 +279,7 @@ client.on("message", (msg) => {
                 {
                   name: "Away Team ✈️",
                   value: `${game.vTeam.fullName}
-                  😀 ${awayScore}`,
+                  😢 ${awayScore}`,
                   inline: true,
                 }
               )
@@ -304,7 +305,7 @@ client.on("message", (msg) => {
                 {
                   name: "Home Team 🏠",
                   value: `${game.hTeam.fullName}
-                  😀 ${homeScore}`,
+                  😢 ${homeScore}`,
                   inline: true,
                 },
                 {
