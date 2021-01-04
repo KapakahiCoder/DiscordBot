@@ -72,7 +72,15 @@ client.on("message", (msg) => {
         const pressure = response.data.main.pressure;
         const wind = response.data.wind.speed;
 
-        console.log(response.data.name, "city");
+        const unixTime = response.data.dt;
+        const milliseconds = unixTime * 1000;
+        const dateObject = new Date(milliseconds);
+        const readableDate = dateObject.toLocaleString();
+        const dateArray = readableDate.split(" ");
+        const date = dateArray[0].slice(0, -1);
+
+        console.log(unixTime, readableDate, date, "DDDDDDDDD");
+
         const todayWeatherEmbed = new Discord.MessageEmbed()
           .setColor(0x34c6eb)
           .setTitle("Today's Weather")
@@ -87,14 +95,14 @@ client.on("message", (msg) => {
             { name: "Pressure", value: `${pressure} hPa`, inline: true },
             { name: "Wind", value: `${wind} mph`, inline: true },
             { name: "Sunrise", value: sunrise, inline: true },
-            { name: "Sunset", value: sunset, inline: true }
+            { name: "Sunsettttt", value: sunset, inline: true }
           )
           .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
           .setTimestamp();
         try {
           msg.channel.send(todayWeatherEmbed);
         } catch {
-          msg.reply("Sorry, there was an error. Please try again later");
+          msg.reply("Sorry, there was an error. Please try again later.");
         }
       })
       .catch((error) => {
