@@ -160,30 +160,30 @@ client.on("message", (msg) => {
               .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
-                  name: "Morning Temp",
+                  name: "Morning Temp  🌡",
                   value: `${mornTemp}F`,
                   inline: true,
                 },
                 {
-                  name: "Day Temp",
+                  name: "Day Temp  🌞",
                   value: `${dayTemp}F`,
                   inline: true,
                 },
                 {
-                  name: "Evening Temp",
+                  name: "Evening Temp  🌜",
                   value: `${eveningTemp}F`,
                   inline: true,
                 },
                 {
-                  name: "Night Temp",
+                  name: "Night Temp 🌃",
                   value: `${nightTemp}F`,
                   inline: false,
                 }
               )
               .addFields(
-                { name: "Conditions", value: condition, inline: true },
-                { name: "Humidity", value: `${humidity}%`, inline: true },
-                { name: "Wind", value: `${wind} mph`, inline: true }
+                { name: "Conditions 🌲", value: condition, inline: true },
+                { name: "Humidity  😰 ", value: `${humidity}%`, inline: true },
+                { name: "Wind  💨 ", value: `${wind} mph`, inline: true }
               )
 
               .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
@@ -266,19 +266,19 @@ client.on("message", (msg) => {
               .setColor("RANDOM")
               .setTitle("NBA.com")
               .setURL("http://www.nba.com")
-              .setDescription("Game results:")
+              .setDescription("🏀 Game results:")
               .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
-                  name: "Home Team",
+                  name: "Home Team 🏠",
                   value: `${game.hTeam.fullName}
-              ${homeScore}`,
+                  😀 ${homeScore}`,
                   inline: true,
                 },
                 {
-                  name: "Away Team",
+                  name: "Away Team ✈️",
                   value: `${game.vTeam.fullName}
-              ${awayScore}`,
+                  😀 ${awayScore}`,
                   inline: true,
                 }
               )
@@ -298,19 +298,19 @@ client.on("message", (msg) => {
               .setColor("RANDOM")
               .setTitle("NBA.com")
               .setURL("http://www.nba.com")
-              .setDescription("Game results:")
+              .setDescription("🏀 Game results:")
               .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
-                  name: "Home Team",
+                  name: "Home Team 🏠",
                   value: `${game.hTeam.fullName}
-            ${homeScore}`,
+                  😀 ${homeScore}`,
                   inline: true,
                 },
                 {
-                  name: "Away Team",
+                  name: "Away Team ✈️",
                   value: `${game.vTeam.fullName}
-            ${awayScore}`,
+                  😀 ${awayScore}`,
                   inline: true,
                 }
               )
@@ -324,7 +324,7 @@ client.on("message", (msg) => {
               msg.reply("Sorry, there was an error. Please try again later");
             }
           }
-          msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀");
+          //msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀");
         });
       })
       .catch((error) => {
