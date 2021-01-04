@@ -70,14 +70,16 @@ client.on("message", (msg) => {
         const feelsLike = parseFloat(
           1.8 * (response.data.main.feels_like - 273) + 32
         ).toFixed(2);
+
+        console.log(response.data.name, "city");
         const todayWeatherEmbed = new Discord.MessageEmbed()
           .setColor(0x34c6eb)
           .setTitle("Today's Weather")
           .setAuthor(msg.author.username)
           .addFields(
-            { name: "Current temp", value: `${temp}F` },
-            { name: "Feels like", value: `${feelsLike}F` },
-            { name: "Condtions", value: condition }
+            { name: "Current temp     ", value: `${temp}F`, inline: true },
+            { name: "Feels like     ", value: `${feelsLike}F`, inline: true },
+            { name: "Condtions", value: condition, inline: true }
           )
           .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
           .setTimestamp();
@@ -123,6 +125,20 @@ client.on("message", (msg) => {
             const milliseconds = unixTime * 1000;
             const dateObject = new Date(milliseconds);
             const readableDate = dateObject.toLocaleString();
+            const weatherForecast = new Discord.MessageEmbed()
+              .setColor(RANDOM)
+              .setTitle(`${readableDate} Weather Report`)
+              .setAuthor(msg.author.username)
+              .addFields({
+                d,
+              })
+              .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
+              .setTimestamp();
+            try {
+              msg.channel.send(weatherForecast);
+            } catch {
+              msg.reply("Sorry, there was an error. Please try again later");
+            }
             console.log(readableDate, "@#@#$@#$@#$@#");
             console.log("day " + i);
             console.log(unixTime, "DATTTTE");
