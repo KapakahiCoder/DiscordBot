@@ -72,19 +72,17 @@ client.on("message", (msg) => {
         const pressure = response.data.main.pressure;
         const wind = response.data.wind.speed;
 
-        const unixTime = response.data.dt;
-        const milliseconds = unixTime * 1000;
-        const dateObject = new Date(milliseconds);
-        const readableDate = dateObject.toLocaleString();
-        const dateArray = readableDate.split(" ");
-        const date = dateArray[0].slice(0, -1);
-
-        console.log(unixTime, readableDate, date, "DDDDDDDDD");
+        const currentMilliseconds = response.data.dt * 1000;
+        const dateObject = new Date(currentMilliseconds);
+        const todayDate = dateObject
+          .toLocaleString()
+          .split(" ")[0]
+          .slice(0, -1);
 
         const todayWeatherEmbed = new Discord.MessageEmbed()
           .setColor(0x34c6eb)
-          .setTitle("Today's Weather")
-          .setAuthor(msg.author.username)
+          .setTitle(`Weather for ${todayDate}`)
+          .setAuthor(`Requested by ${msg.author.username}`)
           .addFields(
             { name: "Current temp ", value: `${temp}F`, inline: true },
             { name: "Feels like ", value: `${feelsLike}F`, inline: true },
