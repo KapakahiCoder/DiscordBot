@@ -117,6 +117,19 @@ client.on("message", (msg) => {
             const unixTime = response.data.daily[i].dt;
             const sunrise = response.data.daily[i].sunrise;
             const sunset = response.data.daily[i].sunset;
+            const mornTemp = parseFloat(
+              1.8 * (response.data.daily[1].temp.morn - 273) + 32
+            ).toFixed(2);
+            const dayTemp = parseFloat(
+              1.8 * (response.data.daily[1].temp.day - 273) + 32
+            ).toFixed(2);
+            const eveningTemp = parseFloat(
+              1.8 * (response.data.daily[1].temp.eve - 273) + 32
+            ).toFixed(2);
+            const nightTemp = parseFloat(
+              1.8 * (response.data.daily[1].temp.night - 273) + 32
+            ).toFixed(2);
+
             const pressure = response.data.daily[i].pressure;
             const humidity = response.data.daily[i].humidity;
             const wind = response.data.daily[i].wind_speed;
@@ -126,12 +139,33 @@ client.on("message", (msg) => {
             const dateObject = new Date(milliseconds);
             const readableDate = dateObject.toLocaleString();
             const weatherForecast = new Discord.MessageEmbed()
-              .setColor(RANDOM)
+              .setColor("RANDOM")
               .setTitle(`${readableDate} Weather Report`)
               .setAuthor(msg.author.username)
-              .addFields({
-                d,
-              })
+              .addFields(
+                {
+                  name: "Morning Temp",
+                  value: `${mornTemp}F`,
+                  inline: true,
+                },
+                {
+                  name: "Day Temp",
+                  value: `${dayTemp}F`,
+                  inline: true,
+                },
+                {
+                  name: "Evening Temp",
+                  value: `${eveningTemp}F`,
+                  inline: true,
+                },
+                {
+                  name: "Night Temp",
+                  value: `${nightTemp}F`,
+                  inline: true,
+                }
+              )
+              .addFields({ name: "Condition", value: condition })
+
               .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
               .setTimestamp();
             try {
