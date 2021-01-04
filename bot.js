@@ -107,7 +107,7 @@ client.on("message", (msg) => {
       const lon = response.data.results[0].geometry.location.lng;
 
       const weather_token = process.env.OPEN_WEATHER_API_KEY;
-      const weatherForecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${weather_token}`;
+      const weatherForecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=imperial&appid=${weather_token}`;
 
       axios
         .get(weatherForecastURL)
@@ -117,18 +117,10 @@ client.on("message", (msg) => {
             const unixTime = response.data.daily[i].dt;
             const sunrise = response.data.daily[i].sunrise;
             const sunset = response.data.daily[i].sunset;
-            const mornTemp = parseFloat(
-              1.8 * (response.data.daily[1].temp.morn - 273) + 32
-            ).toFixed(2);
-            const dayTemp = parseFloat(
-              1.8 * (response.data.daily[1].temp.day - 273) + 32
-            ).toFixed(2);
-            const eveningTemp = parseFloat(
-              1.8 * (response.data.daily[1].temp.eve - 273) + 32
-            ).toFixed(2);
-            const nightTemp = parseFloat(
-              1.8 * (response.data.daily[1].temp.night - 273) + 32
-            ).toFixed(2);
+            const mornTemp = response.data.daily[1].temp.morn;
+            const dayTemp = response.data.daily[1].temp.day;
+            const eveningTemp = response.data.daily[1].temp.eve;
+            const nightTemp = response.data.daily[1].temp.night;
 
             const pressure = response.data.daily[i].pressure;
             const humidity = response.data.daily[i].humidity;
@@ -138,9 +130,12 @@ client.on("message", (msg) => {
             const milliseconds = unixTime * 1000;
             const dateObject = new Date(milliseconds);
             const readableDate = dateObject.toLocaleString();
+            const dateArray = readableDate.split(" ");
+            const date = dateArray[0].slice(0, -1);
+
             const weatherForecast = new Discord.MessageEmbed()
               .setColor("RANDOM")
-              .setTitle(`${readableDate} Weather Report`)
+              .setTitle(`${date} Weather Report`)
               .setAuthor(msg.author.username)
               .addFields(
                 {
@@ -161,10 +156,14 @@ client.on("message", (msg) => {
                 {
                   name: "Night Temp",
                   value: `${nightTemp}F`,
-                  inline: true,
+                  inline: false,
                 }
               )
-              .addFields({ name: "Condition", value: condition })
+              .addFields(
+                { name: "Conditions", value: condition, inline: true },
+                { name: "Humidity", value: `${humidity}%`, inline: true },
+                { name: "Wind", value: `${wind} mph`, inline: true }
+              )
 
               .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
               .setTimestamp();
@@ -174,13 +173,10 @@ client.on("message", (msg) => {
               msg.reply("Sorry, there was an error. Please try again later");
             }
             console.log(readableDate, "@#@#$@#$@#$@#");
-            console.log("day " + i);
             console.log(unixTime, "DATTTTE");
             console.log(pressure, "DATTTTE");
             console.log(humidity, "DATTTTE");
             console.log(wind, "DATTTTE");
-            console.log(condition, "DATTTTE");
-            console.log(icon, "DATTTTE");
           }
         })
         .catch((error) => {
