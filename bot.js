@@ -66,6 +66,11 @@ client.on("message", (msg) => {
         const condition = response.data.weather[0].description;
         const temp = response.data.main.temp;
         const feelsLike = response.data.main.feels_like;
+        const sunrise = response.data.sys.sunrise;
+        const sunset = response.data.sys.sunset;
+        const humidity = response.data.main.humidity;
+        const pressure = response.data.main.pressure;
+        const wind = response.data.wind.speed;
 
         console.log(response.data.name, "city");
         const todayWeatherEmbed = new Discord.MessageEmbed()
@@ -73,9 +78,16 @@ client.on("message", (msg) => {
           .setTitle("Today's Weather")
           .setAuthor(msg.author.username)
           .addFields(
-            { name: "Current temp     ", value: `${temp}F`, inline: true },
-            { name: "Feels like     ", value: `${feelsLike}F`, inline: true },
+            { name: "Current temp ", value: `${temp}F`, inline: true },
+            { name: "Feels like ", value: `${feelsLike}F`, inline: true },
             { name: "Condtions", value: condition, inline: true }
+          )
+          .addFields(
+            { name: "Humidity", value: `${humidity}%`, inline: true },
+            { name: "Pressure", value: `${pressure} hPa`, inline: true },
+            { name: "Wind", value: `${wind} mph`, inline: true },
+            { name: "Sunrise", value: sunrise, inline: true },
+            { name: "Sunset", value: sunset, inline: true }
           )
           .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
           .setTimestamp();
