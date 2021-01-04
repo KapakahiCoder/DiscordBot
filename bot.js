@@ -64,12 +64,8 @@ client.on("message", (msg) => {
       .then((response) => {
         const icon = response.data.weather[0].icon;
         const condition = response.data.weather[0].description;
-        const temp = parseFloat(
-          1.8 * (response.data.main.temp - 273) + 32
-        ).toFixed(2);
-        const feelsLike = parseFloat(
-          1.8 * (response.data.main.feels_like - 273) + 32
-        ).toFixed(2);
+        const temp = response.data.main.temp;
+        const feelsLike = response.data.main.feels_like;
 
         console.log(response.data.name, "city");
         const todayWeatherEmbed = new Discord.MessageEmbed()
