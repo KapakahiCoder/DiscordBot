@@ -137,16 +137,16 @@ client.on("message", (msg) => {
             const condition = response.data.daily[i].weather[0].description;
             const icon = response.data.daily[i].weather[0].icon;
 
-            const unixTime = response.data.daily[i].dt;
-            const milliseconds = unixTime * 1000;
-            const dateObject = new Date(milliseconds);
-            const readableDate = dateObject.toLocaleString();
-            const dateArray = readableDate.split(" ");
-            const date = dateArray[0].slice(0, -1);
+            const forecastMilliseconds = response.data.daily[i].dt * 1000;
+            const dateObject = new Date(forecastMilliseconds);
+            const forecastDate = dateObject
+              .toLocaleString()
+              .split(" ")[0]
+              .slice(0, -1);
 
             const weatherForecast = new Discord.MessageEmbed()
               .setColor("RANDOM")
-              .setTitle(`${date} Weather Report`)
+              .setTitle(`Weather Report for ${forecastDate}`)
               .setAuthor(`Requested by ${msg.author.username}`)
               .addFields(
                 {
