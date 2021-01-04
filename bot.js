@@ -62,14 +62,30 @@ client.on("message", (msg) => {
     axios
       .get(weatherURL)
       .then((response) => {
+        const icon = response.data.weather[0].icon;
+        const condition = response.data.weather[0].description;
         const temp = parseFloat(
           1.8 * (response.data.main.temp - 273) + 32
         ).toFixed(2);
         const feelsLike = parseFloat(
           1.8 * (response.data.main.feels_like - 273) + 32
         ).toFixed(2);
-        msg.reply(`Current temperature is ${temp}F`);
-        msg.reply(`Feels like ${feelsLike}F`);
+        const todayWeatherEmbed = new Discord.MessageEmbed()
+          .setColor(0x34c6eb)
+          .setTitle("Today's Weather")
+          .setAuthor(msg.author.username)
+          .addFields(
+            { name: "Current temp", value: `${temp}F` },
+            { name: "Feels like", value: `${feelsLike}F` },
+            { name: "Condtions", value: condition }
+          )
+          .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
+          .setTimestamp();
+        try {
+          msg.channel.send(todayWeatherEmbed);
+        } catch {
+          msg.reply("Sorry, there was an error. Please try again later");
+        }
       })
       .catch((error) => {
         console.error(error);
