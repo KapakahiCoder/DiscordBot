@@ -112,11 +112,7 @@ client.on("message", (msg) => {
       axios
         .get(weatherForecastURL)
         .then((response) => {
-          //msg.reply(response);
           for (let i = 1; i < 4; i++) {
-            const unixTime = response.data.daily[i].dt;
-            const sunrise = response.data.daily[i].sunrise;
-            const sunset = response.data.daily[i].sunset;
             const mornTemp = response.data.daily[1].temp.morn;
             const dayTemp = response.data.daily[1].temp.day;
             const eveningTemp = response.data.daily[1].temp.eve;
@@ -127,6 +123,8 @@ client.on("message", (msg) => {
             const wind = response.data.daily[i].wind_speed;
             const condition = response.data.daily[i].weather[0].description;
             const icon = response.data.daily[i].weather[0].icon;
+
+            const unixTime = response.data.daily[i].dt;
             const milliseconds = unixTime * 1000;
             const dateObject = new Date(milliseconds);
             const readableDate = dateObject.toLocaleString();
@@ -172,11 +170,6 @@ client.on("message", (msg) => {
             } catch {
               msg.reply("Sorry, there was an error. Please try again later");
             }
-            console.log(readableDate, "@#@#$@#$@#$@#");
-            console.log(unixTime, "DATTTTE");
-            console.log(pressure, "DATTTTE");
-            console.log(humidity, "DATTTTE");
-            console.log(wind, "DATTTTE");
           }
         })
         .catch((error) => {
