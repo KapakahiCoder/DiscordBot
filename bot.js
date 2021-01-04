@@ -57,7 +57,7 @@ client.on("message", (msg) => {
   if (command === "weather") {
     const weather_token = process.env.OPEN_WEATHER_API_KEY;
     const city = args[0];
-    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_token}`;
+    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weather_token}`;
 
     axios
       .get(weatherURL)
@@ -118,7 +118,6 @@ client.on("message", (msg) => {
             const eveningTemp = response.data.daily[1].temp.eve;
             const nightTemp = response.data.daily[1].temp.night;
 
-            const pressure = response.data.daily[i].pressure;
             const humidity = response.data.daily[i].humidity;
             const wind = response.data.daily[i].wind_speed;
             const condition = response.data.daily[i].weather[0].description;
@@ -301,7 +300,7 @@ client.on("message", (msg) => {
               msg.reply("Sorry, there was an error. Please try again later");
             }
           }
-          msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀🏀🏀🏀");
+          msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀");
         });
       })
       .catch((error) => {
