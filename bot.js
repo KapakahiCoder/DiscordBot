@@ -79,17 +79,15 @@ client.on("message", (msg) => {
 
         const sunriseMilliseconds = response.data.sys.sunrise * 1000;
         const sunriseObject = new Date(sunriseMilliseconds);
-        const sunriseTime = sunriseObject
-          .toLocaleString()
-          .split(" ")[0]
-          .slice(0, -1);
-        console.log(sunriseObject.toLocaleString().split(" "));
+        const sunriseReadable = sunriseObject.toLocaleString().split(" ");
+        sunriseReadable.shift();
+        const sunriseTime = sunriseReadable.join(" ");
+
         const sunsetMilliseconds = response.data.sys.sunset * 1000;
         const sunsetObject = new Date(sunsetMilliseconds);
-        const sunsetTime = sunsetObject
-          .toLocaleString()
-          .split(" ")[0]
-          .slice(0, -1);
+        const sunsetReadable = sunsetObject.toLocaleString().split(" ");
+        sunsetReadable.shift();
+        const sunsetTime = sunsetReadable.join(" ");
 
         const todayWeatherEmbed = new Discord.MessageEmbed()
           .setColor(0x34c6eb)
