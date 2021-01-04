@@ -66,8 +66,6 @@ client.on("message", (msg) => {
         const condition = response.data.weather[0].description;
         const temp = response.data.main.temp;
         const feelsLike = response.data.main.feels_like;
-        const sunrise = response.data.sys.sunrise;
-        const sunset = response.data.sys.sunset;
         const humidity = response.data.main.humidity;
         const pressure = response.data.main.pressure;
         const wind = response.data.wind.speed;
@@ -75,6 +73,20 @@ client.on("message", (msg) => {
         const currentMilliseconds = response.data.dt * 1000;
         const dateObject = new Date(currentMilliseconds);
         const todayDate = dateObject
+          .toLocaleString()
+          .split(" ")[0]
+          .slice(0, -1);
+
+        const sunriseMilliseconds = response.data.sys.sunrise * 1000;
+        const sunriseObject = new Date(sunriseMilliseconds);
+        const sunriseTime = sunriseObject
+          .toLocaleString()
+          .split(" ")[0]
+          .slice(0, -1);
+        console.log(sunriseObject.toLocaleString().split(" "));
+        const sunsetMilliseconds = response.data.sys.sunset * 1000;
+        const sunsetObject = new Date(sunsetMilliseconds);
+        const sunsetTime = sunsetObject
           .toLocaleString()
           .split(" ")[0]
           .slice(0, -1);
@@ -92,8 +104,8 @@ client.on("message", (msg) => {
             { name: "Humidity", value: `${humidity}%`, inline: true },
             { name: "Pressure", value: `${pressure} hPa`, inline: true },
             { name: "Wind", value: `${wind} mph`, inline: true },
-            { name: "Sunrise", value: sunrise, inline: true },
-            { name: "Sunsettttt", value: sunset, inline: true }
+            { name: "Sunrise", value: sunriseTime, inline: true },
+            { name: "Sunset", value: sunsetTime, inline: true }
           )
           .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
           .setTimestamp();
