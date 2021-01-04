@@ -91,19 +91,19 @@ client.on("message", (msg) => {
 
         const todayWeatherEmbed = new Discord.MessageEmbed()
           .setColor(0x34c6eb)
-          .setTitle(`Weather for ${todayDate}`)
+          .setTitle(`🛰️ Weather for ${todayDate}`)
           .setAuthor(`Requested by ${msg.author.username}`)
           .addFields(
-            { name: "Current temp ", value: `${temp}F`, inline: true },
-            { name: "Feels like ", value: `${feelsLike}F`, inline: true },
-            { name: "Condtions", value: condition, inline: true }
+            { name: "Current temp 🌡️ ", value: `${temp}F`, inline: true },
+            { name: "Feels like  🌈 ", value: `${feelsLike}F`, inline: true },
+            { name: "Condtions  🌎 ", value: condition, inline: true }
           )
           .addFields(
-            { name: "Humidity", value: `${humidity}%`, inline: true },
-            { name: "Pressure", value: `${pressure} hPa`, inline: true },
-            { name: "Wind", value: `${wind} mph`, inline: true },
-            { name: "Sunrise", value: sunriseTime, inline: true },
-            { name: "Sunset", value: sunsetTime, inline: true }
+            { name: "Humidity 💦", value: `${humidity}%`, inline: true },
+            { name: "Pressure  💫 ", value: `${pressure} hPa`, inline: true },
+            { name: "Wind 🌬️", value: `${wind} mph`, inline: true },
+            { name: "Sunrise 🌅", value: sunriseTime, inline: true },
+            { name: "Sunset 🌇", value: sunsetTime, inline: true }
           )
           .setThumbnail(`http://api.openweathermap.org/img/w/${icon}`)
           .setTimestamp();
