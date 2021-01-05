@@ -335,21 +335,25 @@ client.on("message", (msg) => {
     const helpEmbed = new Discord.MessageEmbed()
       .setColor(0xbbdaed)
       .setTitle("Help Commands")
+      .setThumbnail("https://imgur.com/wUqA2Xr")
       .addFields(
-        { name: "!hi or !hello", value: "Replies with a random greeting" },
-        { name: "!chuck", value: "Get a Chuck Norris joke" },
-        { name: "!dadjoke", value: "Get a funny(?) dad joke" },
-        { name: "!ego", value: "Boost your ego" },
-        { name: "!nba yyyy-mm-dd", value: "See all NBA scores for that day" },
+        { name: "!hi or !hello", value: "Replies with a random greeting 👋" },
+        { name: "!chuck", value: "Get a Chuck Norris joke 🤣" },
+        { name: "!dadjoke", value: "Get a funny(?) dad joke 👨" },
+        { name: "!ego", value: "Boost your ego 🚀" },
+        {
+          name: "!nba yyyy-mm-dd",
+          value: "See all NBA scores for that day ⛹️‍♂️",
+        },
         {
           name: "!weather city-name or !weather zipcode",
-          value: "Get current weather",
+          value: "Get current weather ☂️",
         },
         {
           name: "!forecast city-name or !forecast zipcode",
-          value: "Get a 3-day weather forecast",
+          value: "Get a 3-day weather forecast ❄️",
         },
-        { name: "!help", value: "See all the Discort bot commands" }
+        { name: "!help", value: "See all the Discort bot commands 📝" }
       )
       .setTimestamp();
     try {
