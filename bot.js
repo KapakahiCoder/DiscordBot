@@ -69,25 +69,30 @@ client.on("message", (msg) => {
         const humidity = response.data.main.humidity;
         const pressure = response.data.main.pressure;
         const wind = response.data.wind.speed;
-
+        console.log(response.data.dt);
+        console.log(response.data.timezone);
         const currentMilliseconds = response.data.dt * 1000;
         const dateObject = new Date(currentMilliseconds);
+        console.log(dateObject.toLocaleString());
         const todayDate = dateObject
           .toLocaleString()
           .split(" ")[0]
           .slice(0, -1);
 
-        const sunriseMilliseconds = response.data.sys.sunrise * 1000;
+        const sunriseMilliseconds =
+          (response.data.sys.sunrise + response.data.timezone) * 1000;
         const sunriseObject = new Date(sunriseMilliseconds);
-        const sunriseReadable = sunriseObject.toLocaleString().split(" ");
+        const sunriseReadable = sunriseObject.toUTCString().split(" ");
         sunriseReadable.shift();
-        const sunriseTime = sunriseReadable.join(" ");
+        const sunriseTime = sunriseReadable[3];
+        console.log(sunriseReadable, sunriseTime);
 
-        const sunsetMilliseconds = response.data.sys.sunset * 1000;
+        const sunsetMilliseconds =
+          (response.data.sys.sunset + response.data.timezone) * 1000;
         const sunsetObject = new Date(sunsetMilliseconds);
-        const sunsetReadable = sunsetObject.toLocaleString().split(" ");
+        const sunsetReadable = sunsetObject.toUTCString().split(" ");
         sunsetReadable.shift();
-        const sunsetTime = sunsetReadable.join(" ");
+        const sunsetTime = sunsetReadable[3];
 
         const todayWeatherEmbed = new Discord.MessageEmbed()
           .setColor(0x34c6eb)
