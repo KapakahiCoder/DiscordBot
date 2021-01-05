@@ -335,7 +335,7 @@ client.on("message", (msg) => {
     const helpEmbed = new Discord.MessageEmbed()
       .setColor(0xbbdaed)
       .setTitle("Help Commands")
-      .setThumbnail("https://imgur.com/wUqA2Xr")
+      .setThumbnail("https://i.imgur.com/wUqA2Xr.jpg")
       .addFields(
         { name: "!hi or !hello", value: "Replies with a random greeting 👋" },
         { name: "!chuck", value: "Get a Chuck Norris joke 🤣" },
