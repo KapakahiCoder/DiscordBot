@@ -34,7 +34,6 @@ client.on("message", (msg) => {
   ];
   if (command === "hello" || command === "hi") {
     const random = Math.floor(Math.random() * greetings.length + 1);
-    console.log(random);
     msg.reply(` ${greetings[random]}`);
   }
 
@@ -331,6 +330,19 @@ client.on("message", (msg) => {
       .catch((error) => {
         console.error(error);
       });
+  }
+  if (command === "help") {
+    const helpEmbed = new Discord.MessageEmbed()
+      .setColor(0xbbdaed)
+      .setTitle("Help Commands")
+      .addFields(
+        { name: "!hi or !hello", value: "Replies with a random greeting" },
+        { name: "!hi or !hello", value: "Replies with a random greeting" },
+        { name: "!hi or !hello", value: "Replies with a random greeting" },
+        { name: "!hi or !hello", value: "Replies with a random greeting" },
+        { name: "!hi or !hello", value: "Replies with a random greeting" },
+        { name: "!hi or !hello", value: "Replies with a random greeting" }
+      );
   }
 });
 
