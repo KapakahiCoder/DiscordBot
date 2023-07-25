@@ -16,11 +16,11 @@ client.on("message", (msg) => {
   if (msg.content[0] !== prefix) {
     return;
   }
-  //Gets the command/prompt from the user
+  // Gets the command/prompt from the user
   const args = msg.content.slice(prefix.length).trim().split(" ");
   const command = args.shift().toLowerCase();
 
-  //Greeting
+  // Greeting
   const greetings = [
     "Hello 👋",
     "Aloha 🤙🏽",
@@ -37,7 +37,7 @@ client.on("message", (msg) => {
     msg.reply(` ${greetings[random]}`);
   }
 
-  // ego boast
+  // Ego boast
   if (command === "ego") {
     axios
       .get("https://complimentr.com/api", {
@@ -53,7 +53,7 @@ client.on("message", (msg) => {
       });
   }
 
-  //Current Weather
+  // Current Weather
   if (command === "weather") {
     const weather_token = process.env.OPEN_WEATHER_API_KEY;
     const city = args[0];
@@ -123,8 +123,7 @@ client.on("message", (msg) => {
       });
   }
 
-  //Weather Forecast
-
+  // Weather Forecast
   if (command === "forecast") {
     const rapidapi_key = process.env.RAPID_API_KEY;
     const location = args[0];
@@ -207,7 +206,7 @@ client.on("message", (msg) => {
     weatherForecast();
   }
 
-  //random dad jokes
+  // Random dad jokes
   if (command === "dadjoke" || command === "dadjokes") {
     axios
       .get("https://icanhazdadjoke.com/", {
@@ -222,7 +221,7 @@ client.on("message", (msg) => {
       });
   }
 
-  //random chuck norris jokes
+  // Random chuck norris jokes
   if (command === "chuck") {
     axios
       .get("https://api.chucknorris.io/jokes/random", {
@@ -237,7 +236,7 @@ client.on("message", (msg) => {
       });
   }
 
-  //random insults
+  // Random insults
   if (command === "insult" || command === "insults") {
     axios
       .get("https://evilinsult.com/generate_insult.php")
@@ -264,8 +263,7 @@ client.on("message", (msg) => {
           let homeScore = parseInt(game.hTeam.score.points);
           let awayScore = parseInt(game.vTeam.score.points);
 
-          //if home team wins, home team logo is set to image and away team is thumbnail
-          //Will refactor this later
+          // If home team wins, home team logo is set to image and away team is thumbnail
           if (homeScore >= awayScore) {
             const scoreEmbed = new Discord.MessageEmbed()
               .setColor("RANDOM")
@@ -296,8 +294,7 @@ client.on("message", (msg) => {
             } catch {
               msg.reply("Sorry, there was an error. Please try again later");
             }
-            // away team is winner, so their logo is set to image and home team is thumbnail
-            //Will refactor this part later
+            // If away team is winner, their logo is set to image and home team is set to thumbnail
           } else {
             const scoreEmbed = new Discord.MessageEmbed()
               .setColor("RANDOM")
@@ -329,7 +326,7 @@ client.on("message", (msg) => {
               msg.reply("Sorry, there was an error. Please try again later");
             }
           }
-          //msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀");
+          msg.channel.send("🏀🏀🏀🏀🏀🏀🏀🏀🏀");
         });
       })
       .catch((error) => {
