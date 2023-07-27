@@ -14,7 +14,7 @@ This is a simple Discord bot that I did for fun for my friend's Discord server. 
 npm install
 ```
 
-Please rename the ".env-example" file to ".env" and enter your own RapidAPI key and Open Weather API key, and your Discord token.
+Please rename the ".env-example" file to ".env" and enter your own RapidAPI key, Open Weather API key, and your Discord token.
 
 ### Compiles and hot-reloads for development
 
