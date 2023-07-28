@@ -5,13 +5,13 @@ on:
     branches: [master]
 
 jobs:
-  hello:
+  deployToAws:
     runs-on: ubuntu-latest
     steps:
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v1.0.0
         with:
           USERNAME: ubuntu
-          HOST: ${ { secrets.HOST } }
+          HOST: ${ { secrets.HOSTS } }
           PASSWORD: ${ { secrets.PASSWORD } }
           script: whoami
