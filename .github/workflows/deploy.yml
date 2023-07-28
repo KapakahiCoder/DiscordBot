@@ -12,6 +12,6 @@ jobs:
         uses: appleboy/ssh-action@v1.0.0
         with:
           USERNAME: ubuntu
-          HOST: ${ { secrets.HOSTS } }
+          HOST: ${ { secrets.HOST } }
           PASSWORD: ${ { secrets.PASSWORD } }
           script: whoami
