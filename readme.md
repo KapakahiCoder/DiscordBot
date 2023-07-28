@@ -1,6 +1,6 @@
 # Discord Bot
 
-This is a simple Discord bot that I did for fun for my friend's Discord server. It can tell jokes, get the current weather, get weather forecast, get NBA scores by date, etc.
+This is a simple Discord bot that I did for fun for my friend's Discord server. It can tell jokes, get the current weather, get the weather forecast, get NBA scores by date, etc.
 
 ### Here's a picture of what the bot returns
 
