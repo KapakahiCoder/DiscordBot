@@ -69,11 +69,8 @@ client.on("message", (msg) => {
         const humidity = response.data.main.humidity;
         const pressure = response.data.main.pressure;
         const wind = response.data.wind.speed;
-        console.log(response.data.dt);
-        console.log(response.data.timezone);
         const currentMilliseconds = response.data.dt * 1000;
         const dateObject = new Date(currentMilliseconds);
-        console.log(dateObject.toLocaleString());
         const todayDate = dateObject
           .toLocaleString()
           .split(" ")[0]
