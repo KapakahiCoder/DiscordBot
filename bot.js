@@ -34,7 +34,7 @@ client.on("message", (msg) => {
   ];
   if (command === "hello" || command === "hi") {
     const random = Math.floor(Math.random() * greetings.length + 1);
-    msg.reply(` ${greetings[random]}`);
+    msg.reply(` test ${greetings[random]}`);
   }
 
   // Ego boast
@@ -211,6 +211,7 @@ client.on("message", (msg) => {
       })
       .then((response) => {
         const joke = response.data.joke;
+        msg.reply("test");
         msg.reply(joke);
       })
       .catch((error) => {
