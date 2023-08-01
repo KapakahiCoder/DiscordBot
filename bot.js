@@ -34,7 +34,7 @@ client.on("message", (msg) => {
   ];
   if (command === "hello" || command === "hi") {
     const random = Math.floor(Math.random() * greetings.length + 1);
-    msg.reply(` test ${greetings[random]}`);
+    msg.reply(` ${greetings[random]}`);
   }
 
   // Ego boast
